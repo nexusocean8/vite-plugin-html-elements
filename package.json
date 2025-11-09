@@ -1,0 +1,45 @@
+{
+  "name": "vite-plugin-html-elements",
+  "version": "0.0.1",
+  "description": "Modular HTML without the JavaScript",
+  "author": "Vincent Medina",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org.com/nexusocean/vite-plugin-html-elements"
+  },
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "html",
+    "elements",
+    "static"
+  ],
+  "homepage": "https://htmlelements.dev",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\"",
+    "prepublis`hO`nly": "npm run build"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0 || ^6.0.0 || ^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2"
+  }
+}
