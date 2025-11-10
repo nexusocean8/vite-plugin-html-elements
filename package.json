@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://codeberg.org.com/nexusocean/vite-plugin-html-elements"
+    "url": "https://codeberg.org/nexusocean/vite-plugin-html-elements"
   },
   "keywords": [
     "vite",

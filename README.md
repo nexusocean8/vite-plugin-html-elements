@@ -262,6 +262,6 @@ MIT
 ## 🔗 Links
 
 - [Documentation](https://htmlelements.dev)
-- [GitHub](https://codeberg.org.com/nexusocean/vite-plugin-html-elements)
+- [GitHub](https://codeberg.org/nexusocean/vite-plugin-html-elements)
 - [npm](https://www.npmjs.com/package/vite-plugin-html-elements)
-- [Issues](https://codeberg.org.com/nexusocean/vite-plugin-html-elements/issues)
+- [Issues](https://codeberg.org/nexusocean/vite-plugin-html-elements/issues)
