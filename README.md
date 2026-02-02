@@ -253,7 +253,7 @@ No! The plugin runs at build time. The output is pure static HTML that works any
 
 ## 🤝 Contributing
 
-Contributions welcome! Please open an issue or PR on GitHub.
+Contributions welcome! Please open an issue or PR on Codeberg.
 
 ## 📄 License
 
@@ -262,6 +262,6 @@ MIT
 ## 🔗 Links
 
 - [Documentation](https://htmlelements.dev)
-- [GitHub](https://codeberg.org/nexusocean/vite-plugin-html-elements)
+- [Codeberg](https://codeberg.org/nexusocean/vite-plugin-html-elements)
 - [npm](https://www.npmjs.com/package/vite-plugin-html-elements)
 - [Issues](https://codeberg.org/nexusocean/vite-plugin-html-elements/issues)
