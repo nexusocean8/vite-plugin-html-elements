@@ -233,12 +233,10 @@ htmlElements({
 ```
 dist/
 ├── index.html
+├── blog.html
 └── blog/
-    ├── index.html
-    ├── getting-started/
-    │   └── index.html
-    └── advanced-tips/
-        └── index.html
+    ├── getting-started.html
+    └── advanced-tips.html
 ```
 
 **Benefits:**
