@@ -39,10 +39,10 @@ export interface HtmlElementsOptions {
   srcDir?: string;
 
   /**
-   * Apply default project structure conventions
-   * When true: sets root to 'src', publicDir to '../public', outDir to '../dist'
+   * Apply opinionated project structure conventions
+   * When true: sets root to 'src', publicDir to '../public', outDir to '../dist' (default)
    * When false: respects user's Vite config completely
-   * @default false
+   * @default true
    */
   defaults?: boolean;
 }
@@ -53,7 +53,7 @@ export function htmlElements(options: HtmlElementsOptions = {}): Plugin {
     basePath = '/',
     routes,
     srcDir = 'src',
-    defaults = false,
+    defaults = true,
   } = options;
 
   return {
