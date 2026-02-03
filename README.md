@@ -392,7 +392,7 @@ export default defineConfig({
     htmlElements({
       routes: [
         { path: '/', source: 'index.html' },
-        { path: '/blog', source: 'blog/index.html' },
+        { path: '/blog', source: 'blog.html' },
         { path: '/blog/post-1', source: 'blog/post-1.html' },
         { path: '/blog/post-2', source: 'blog/post-2.html' },
       ],
