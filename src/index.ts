@@ -131,16 +131,16 @@ function getRoutesEntries(
       return;
     }
 
+    // Normalize path: remove trailing slash (except for root)
+    const normalizedPath =
+      route.path === '/' ? '/' : route.path.replace(/\/$/, '');
+
     // Convert route path to entry name
-    // '/' -> 'index'
-    // '/blog' -> 'blog/index'
-    // '/blog/today-is-nice' -> 'blog/today-is-nice/index'
     let entryName: string;
-    if (route.path === '/') {
+    if (normalizedPath === '/') {
       entryName = 'index';
     } else {
-      // Remove leading slash and add /index for directory structure
-      const cleanPath = route.path.replace(/^\//, '');
+      const cleanPath = normalizedPath.replace(/^\//, '');
       entryName = `${cleanPath}/index`;
     }
 
@@ -148,7 +148,7 @@ function getRoutesEntries(
 
     if (debug) {
       console.log(
-        `🗺️  Route: ${route.path} -> ${route.source} (output: ${entryName}.html)`
+        `🗺️  Route: ${normalizedPath} -> ${route.source} (output: ${entryName}.html)`
       );
     }
   });
