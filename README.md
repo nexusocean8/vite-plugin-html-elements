@@ -295,8 +295,8 @@ project/
 │   │       ├── mobile.html
 │   │       └── desktop.html
 │   ├── blog/
-│   │   ├── index.html
-│   │   └── post-1.html
+│   │   |── post-1.html
+│   └── blog.html
 │   ├── index.html
 │   └── styles.css
 └── vite.config.js
