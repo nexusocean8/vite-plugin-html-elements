@@ -131,16 +131,16 @@ function getRoutesEntries(
       return;
     }
 
-    // Normalize path: remove trailing slash (except for root)
-    const normalizedPath =
-      route.path === '/' ? '/' : route.path.replace(/\/$/, '');
-
     // Convert route path to entry name
+    // '/' -> 'index'
+    // '/blog' -> 'blog/index'
+    // '/blog/today-is-nice' -> 'blog/today-is-nice/index'
     let entryName: string;
-    if (normalizedPath === '/') {
+    if (route.path === '/') {
       entryName = 'index';
     } else {
-      const cleanPath = normalizedPath.replace(/^\//, '');
+      // Remove leading slash and add /index for directory structure
+      const cleanPath = route.path.replace(/^\//, '');
       entryName = `${cleanPath}/index`;
     }
 
@@ -148,7 +148,7 @@ function getRoutesEntries(
 
     if (debug) {
       console.log(
-        `🗺️  Route: ${normalizedPath} -> ${route.source} (output: ${entryName}.html)`
+        `🗺️  Route: ${route.path} -> ${route.source} (output: ${entryName}.html)`
       );
     }
   });
@@ -237,31 +237,62 @@ export function getHtmlEntries(
   srcDir: string,
   debug: boolean = false
 ): Record<string, string> {
-  try {
-    const htmlFiles = readdirSync(srcDir).filter((file) =>
-      file.endsWith('.html')
-    );
+  const entries: Record<string, string> = {};
 
-    const entries: Record<string, string> = {};
-    htmlFiles.forEach((file) => {
-      const name = file.replace('.html', '');
-      entries[name] = resolve(srcDir, file);
-    });
+  function scanDirectory(dir: string, basePath: string = '') {
+    try {
+      const items = readdirSync(dir, { withFileTypes: true });
 
-    if (debug) {
-      console.log(
-        `📄 Auto-discovered HTML files: ${Object.keys(entries).join(', ')}`
-      );
+      for (const item of items) {
+        const fullPath = resolve(dir, item.name);
+        const relativePath = basePath ? `${basePath}/${item.name}` : item.name;
+
+        if (item.isDirectory()) {
+          // Skip elements directory
+          if (item.name === 'elements') {
+            continue;
+          }
+          // Recursively scan subdirectories
+          scanDirectory(fullPath, relativePath);
+        } else if (item.isFile() && item.name.endsWith('.html')) {
+          // Generate entry name from file path
+          let entryName: string;
+          if (item.name === 'index.html') {
+            // index.html in root -> 'index'
+            // index.html in blog/ -> 'blog/index'
+            entryName = basePath ? `${basePath}/index` : 'index';
+          } else {
+            // about.html -> 'about/index'
+            // blog/post.html -> 'blog/post/index'
+            const nameWithoutExt = item.name.replace('.html', '');
+            entryName = basePath
+              ? `${basePath}/${nameWithoutExt}/index`
+              : `${nameWithoutExt}/index`;
+          }
+
+          entries[entryName] = fullPath;
+        }
+      }
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
+
+      console.warn(`⚠️  Could not read directory: ${dir}`);
+      if (debug) {
+        console.error(`   ${errorMessage}`);
+      }
     }
-
-    return entries;
-  } catch (error) {
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error';
-    console.warn(`⚠️  Could not read directory: ${srcDir}`);
-    if (debug) {
-      console.error(`   ${errorMessage}`);
-    }
-    return {};
   }
+
+  scanDirectory(srcDir);
+
+  if (debug) {
+    console.log(`📄 Auto-discovered routes:`);
+    Object.keys(entries).forEach((key) => {
+      const url = key === 'index' ? '/' : `/${key.replace('/index', '')}`;
+      console.log(`   ${url} -> ${entries[key].replace(srcDir + '/', '')}`);
+    });
+  }
+
+  return entries;
 }
