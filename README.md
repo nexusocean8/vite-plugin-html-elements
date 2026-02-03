@@ -194,9 +194,9 @@ htmlElements({
 });
 ```
 
-### Non-Opinionated Mode
+### Custom Vite Configuration
 
-Take full control over your Vite configuration:
+Take full control over your Vite configuration by disabling opinionated defaults:
 
 ```javascript
 export default defineConfig({
@@ -205,7 +205,7 @@ export default defineConfig({
   build: { outDir: 'build' },
   plugins: [
     htmlElements({
-      defaults: false, // Disable opinionated defaults
+      defaults: false, // Disable opinionated defaults, use your Vite config
       srcDir: 'pages',
     }),
   ],
@@ -252,7 +252,7 @@ dist/
 
 ### Default Structure (Opinionated)
 
-When using `defaults: true` (the default):
+By default, the plugin uses an opinionated structure:
 
 ```
 project/
@@ -435,7 +435,7 @@ Yes! Fully compatible with Tailwind and other CSS frameworks.
 Yes! Use `basePath: '/repo-name'` to match your repository name.
 
 **What's the difference between `defaults: true` and `defaults: false`?**  
-`defaults: true` applies opinionated structure (`src/` as root, `public/`, `dist/`). Set to `false` to fully control your Vite config.
+`defaults: true` (default) applies opinionated structure (`src/` as root, `public/`, `dist/`). Set to `false` to fully control your Vite config.
 
 **Can elements include JavaScript?**  
 Yes! Elements are just HTML. Include `<script>` tags as needed.
