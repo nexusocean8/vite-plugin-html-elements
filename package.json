@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-html-elements",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Modular HTML without the JavaScript",
   "author": "Vincent Medina",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsup src/index.ts --format esm --dts --out-dir dist",
     "lint": "eslint src --ext .ts",
     "format": "prettier --write \"src/**/*.ts\"",
     "format:check": "prettier --check \"src/**/*.ts\"",
@@ -46,6 +46,7 @@
     "simple-git-hooks": "^2.13.1",
     "tseslint": "^0.0.2",
     "tsparser": "^1.0.2",
+    "tsup": "^8.5.1",
     "typescript": "^6.0.3",
     "vite": "^8.0.8"
   },
